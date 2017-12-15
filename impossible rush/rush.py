@@ -60,15 +60,30 @@ class ballgreen(pygame.sprite.Sprite):
 def chooseball():
 	balllist=[ballyellow(215,-25),ballblue(215, -25),ballgreen(215, -25),ballred(215, -25)]
 	return random.choice(balllist)
-
-
+rotatecount=0
+wheelcolor=["blue","green","yellow","red"]
 pygame.init()
 screen=pygame.display.set_mode ((500,750))
 wheel=colorwheel(90,450)
 ball1=chooseball()
-
-
 clock=pygame.time.Clock()
+font=pygame.font.Font(None,36)
+text=font.render("Impossible Drop press,SPACE to continue",True,(0,0,0))
+positiontitle=text.get_rect(centerx=250,centery=250)
+title=True
+while title:
+	for event in pygame.event.get():
+		if event.type==QUIT:
+			pygame.quit()
+			title=False
+		if event.type==KEYDOWN:
+			if event.key==K_SPACE:
+				title=False
+	screen.fill((255,255,255))
+	screen.blit(text,positiontitle)
+	pygame.display.update()
+	clock.tick(60)
+
 running=True
 while running:
 	for event in pygame.event.get():
@@ -77,19 +92,24 @@ while running:
 			running=False
 		if event.type==KEYDOWN:
 			if event.key==K_SPACE:
+				rotatecount+=1
+				wheel.top=wheelcolor[rotatecount%4]
 				wheel.image=pygame.transform.rotate(wheel.image,90)
 			if event.key==K_ESCAPE:
 				pygame.quit()
 				running=False
 	screen.fill((255,255,255))
-	if ball1.y>475:
-		ball1=chooseball()
 	ball1.y+=(5)
 	rect = pygame.Rect(ball1.x, ball1.y, 35, 35)
-	
+	if wheel.redrect.colliderect(rect):
+		if ball1.color==wheel.top:
+			ball1=chooseball()
+		else:
+			pygame.quit()
+			running=False
+
 	#ball1.rect.move_ip(ball1.x, ball1.y)
 	wheel.draw (screen)
 	ball1.draw(screen)
-	pygame.draw.rect(screen,(0,255,255),rect,1)
 	pygame.display.update()
 	clock.tick(60)
