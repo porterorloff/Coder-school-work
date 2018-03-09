@@ -19,9 +19,21 @@ class app:
 			self._running=False
 		if event.type == pygame.KEYDOWN:
 			if event.key == K_SPACE:
-				self.character.speed_y-=10
+				if self.character.remaining_jumps>0:
+					self.character.remaining_jumps-=1			
+					self.character.speed_y-=10
 			if event.key == K_d:
-				self.character.speed_x+=10	
+				self.character.speed_x=10
+			if event.key == K_a:
+				self.character.speed_x=-10
+
+
+
+		if event.type == pygame.KEYUP:
+			if event.key == K_d:
+				self.character.speed_x = 0
+			if event.key==K_a:
+				self.character.speed_x=0
 
 	def on_loop(self):
 		for entity in self.entities:
@@ -63,6 +75,7 @@ class app:
 
 
 
-
+clock = pygame.time.Clock()
+clock.tick(60)
 theApp=app()
 theApp.on_execute() 
