@@ -51,8 +51,23 @@ class platform(entity):
 class player(entity):
 	def __init__(self,position):
 		entity.__init__(self, globals.character,position)
-		self.remaining_jumps=0
+		self.remaining_jumps=3
 		
 	def should_move(self):
 		return True
 
+class bottom(platform):
+	def __init__(self):
+		entity.__init__(self, globals.bottom,(0,800))
+
+class bullet(entity):
+	def __init__(self,position,speed):
+		entity.__init__(self, globals.bullet,position)
+		self.speed_x=speed[0]
+		self.speed_y=speed[1]
+	def should_move(self):
+		return True
+		
+
+
+		
