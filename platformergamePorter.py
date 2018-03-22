@@ -13,7 +13,8 @@ class app:
 		self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
 		self._running=True
 		self.character= player((0,0))
-		self.entities=[platform((400,450)),platform((100,600)),entity(globals.camera,(800,120)),entity(globals.minigun,(130,120)),self.character,bottom()]
+		self.minigun=minigun((130,120))
+		self.entities=[platform((400,450)),platform((100,600)),entity(globals.camera,(800,120)),self.character,bottom(),self.minigun]
 	def on_event(self,event):
 		if event.type==pygame.QUIT:
 			self._running=False
@@ -43,7 +44,8 @@ class app:
 		self.minigun.loops_since_shot+=1
 		if self.minigun.loops_since_shot>5:
 			self.minigun.loops_since_shot=0
-			self.entities.append(bullet(self.minigun.position,(0,20)))
+			bulletposition=(self.minigun.position[0],self.minigun.position[1]+300)
+			self.entities.append(bullet(bulletposition,(0,20)))
 
 	def on_render(self):
 		self.screen.fill([255,255,255])

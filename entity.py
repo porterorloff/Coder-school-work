@@ -17,6 +17,11 @@ class entity:
 		for entity in entities:
 			if not self==entity:
 				if self.rect.colliderect(entity.rect):
+					if isinstance(self,bullet)and not isinstance(entity,minigun):
+						entities.remove(self)
+						if isinstance(entity,player):
+							character.hp-=5
+
 					if self.speed_y<=0:
 						self.rect.top=entity.rect.top+entity.rect.height
 						self.position=(self.position[0],self.rect.top)
@@ -37,7 +42,7 @@ class entity:
 					else:
 						self.rect.left=entity.rect.left-self.rect.width
 						self.speed_x=0
-						self.position=(self.rect.left, self.position[1])
+						self.position=(self.rect.left, self. position[1])
 
 
 
@@ -52,6 +57,7 @@ class player(entity):
 	def __init__(self,position):
 		entity.__init__(self, globals.character,position)
 		self.remaining_jumps=3
+		self.hp=100
 		
 	def should_move(self):
 		return True
@@ -67,6 +73,13 @@ class bullet(entity):
 		self.speed_y=speed[1]
 	def should_move(self):
 		return True
+
+
+class minigun(entity):
+	def __init__(self,position):
+		entity.__init__(self, globals.minigun,position)
+		self.loops_since_shot=0
+			
 		
 
 
