@@ -20,3 +20,152 @@ def is_win(grid):
 				return True
 
 	return False
+
+def left(grid):
+	for y in range(4):
+		for x in range(4):
+			if grid [y][x]=="":
+				continue
+			pickedup =grid [y][x]
+			grid [y][x]=""
+			for spot in range(x,-2,-1):
+				if grid [y][spot]=="":
+					continue 
+				if spot==-1:
+					grid [y][0]=pickedup
+				if pickedup==grid [y][spot]:
+					grid[y][spot] *=2
+				else:
+					grid [y][spot+1]=pickedup	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
