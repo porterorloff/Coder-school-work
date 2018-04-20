@@ -1,4 +1,5 @@
 import random
+import turtle as t 
 grid=[[""]*4,[""]*4,[""]*4,[""]*4]
 
 
@@ -30,7 +31,7 @@ def valid_move(grid,move):
 	return True
 
 def is_lose(grid):
-
+	pass
 
 def left(grid):
 	for y in range(4):
@@ -121,3 +122,30 @@ def down(grid):
 				else:
 					grid [spot-1][x]=pickedup
 					break
+
+def square(size,position,color1,color2):
+	t.penup()
+	t.goto(position)
+	t.pendown()
+	t.color(color1,color2)
+	t.begin_fill()
+	for i in range(4):
+		t.forward(size)
+		t.right(90)
+	t.end_fill()
+
+backgroundcolor="#4d8076"
+gridcolor="#2eb8b8"
+tilecolors={	2:"#47d1d1",
+				4:"#67e4e4",
+				"default":"#a3f5f5"
+			}
+def background():
+	square(600,(-300,300), backgroundcolor,backgroundcolor)
+	for i in range (4):
+		for j in range(4):
+			square(100,(-300+40+140*i,300-40-140*j),gridcolor,gridcolor)
+
+t.hideturtle()
+background()
+t.done()
