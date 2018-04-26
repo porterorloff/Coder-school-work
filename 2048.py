@@ -146,6 +146,23 @@ def background():
 		for j in range(4):
 			square(100,(-300+40+140*i,300-40-140*j),gridcolor,gridcolor)
 
+def tile(position,number):
+	if number in tilecolors:
+		square(100,position,tilecolors[number],tilecolors[number])
+	else:
+		square(100,position,tilecolors["default"],tilecolors["default"])
+	t.write(number)
+
+def drawgrid(grid):
+	for x in range(4):
+		for y in range (4):
+			if grid [y][x] != "":
+				tile((-300+40+140*x,300-40-140*y),grid[y][x])
+
+t.tracer(0,0)
 t.hideturtle()
 background()
+grid=[[2]*4,[4]*4,[8]*4,[16]*4]
+drawgrid(grid)
+t.update()
 t.done()
