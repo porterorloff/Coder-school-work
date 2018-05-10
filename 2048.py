@@ -15,6 +15,7 @@ def insertnumber(grid):
 	spot=random.choice(emptyspace)
 	grid[spot[0]][spot[1]]=random.choice([2,2,2,2,2,2,2,4,4,4])
 
+
 def is_win(grid):
 	for x in range (4):
 		for y in range (4):
@@ -139,8 +140,8 @@ def square(size,position,color1,color2):
 
 backgroundcolor="#4d8076"
 gridcolor="#2eb8b8"
-tilecolors={	2:"#47d1d1",
-				4:"#67e4e4",
+tilecolors={	2:"#00ffff",
+				4:"#80ffaa",
 				"default":"#a3f5f5"
 			}
 def background():
@@ -173,30 +174,47 @@ def display():
 
 
 def handleleft():
-	left(grid)
-	insertnumber(grid)
-	display()
+	if valid_move(grid,left):
+		left(grid)
+		insertnumber(grid)
+		display()
+		if is_lose(grid):
+			t.goto((0,-350))
+			t.write("You suck go get a slurpee and ride a jetski!", align="center", font=("Times New Roman", 18, "bold"))
 
 
 
 def handleright():
-	right(grid)
-	insertnumber(grid)
-	display()
-
+	if valid_move(grid,right):
+		right(grid)
+		insertnumber(grid)
+		display()
+		if is_lose(grid):
+			t.penup
+			t.goto((0,-350))
+			t.pendown
+			t.write("You suck go get a slurpee and ride a jetski!", align="center", font=("Times New Roman", 18, "bold"))
 
 
 def handleup():
-	up(grid)
-	insertnumber(grid)
-	display()
+	if valid_move(grid,up):
+		up(grid)
+		insertnumber(grid)
+		display()
+		if is_lose(grid):
+			t.goto((0,-350))
+			t.write("You suck go get a slurpee and ride a jetski!", align="center", font=("Times New Roman", 18, "bold"))
 
 
 
-def handledow():
-	down(grid)
-	insertnumber(grid)
-	display()
+def handledown():
+	if valid_move(grid,down):
+		down(grid)
+		insertnumber(grid)
+		display()
+		if is_lose(grid):
+			t.goto((0,-350))
+			t.write("You suck go get a slurpee and ride a jetski!", align="center", font=("Times New Roman", 18, "bold"))
 
 
 
@@ -219,3 +237,4 @@ t.hideturtle()
 display()
 t.listen()
 t.mainloop()
+
